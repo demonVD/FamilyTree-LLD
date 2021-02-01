@@ -36,7 +36,6 @@ public class TestFamilyTree {
         personManager.setPartner("Chitra", "Aras");
         personManager.addChild("Arit", Constants.MALE_GENDER);
         personManager.addChild("Chitra", "Ahit", Constants.MALE_GENDER);
-        ;
         personManager.addChild("Chitra", "Jnki", Constants.FEMALE_GENDER);
         personManager.setPartner("Jnki", "Arit");
         personManager.addChild("Jnki", "Laki", Constants.MALE_GENDER);

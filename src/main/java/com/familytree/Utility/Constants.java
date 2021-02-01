@@ -1,13 +1,16 @@
 package com.familytree.Utility;
 
+/**
+ * store for all constants used in the project
+ */
 public final class Constants {
     public final static String INPUT_ARGUMENT = "--inputFilePath=";
     public final static String NO_ARGUMENTS_PROVIDED = "Please provide input file path.";
     public final static String INVALID_ARGUMENT = "Please give --inputFilePath=FilePath as the argument.";
     public final static String FILE_NOT_FOUND = "File not found.";
     public final static String INVALID_COMMAND_IN_FILE = "INVALID_COMMAND";
-    public final static String ADD_CHILD_FN_SIG = "ADD_CHILD";
-    public final static String GET_RELATIONSHIP_FN_SIG = "GET_RELATIONSHIP";
+    public final static String ADD_CHILD_FUNCTION_SIGNATURE = "ADD_CHILD";
+    public static final String GET_RELATIONSHIP_FUNCTION_SIGNATURE = "GET_RELATIONSHIP";
     public final static String UNABLE_TO_READ_FILE = "UNABLE_TO_READ_FILE";
     public static final String FEMALE_GENDER = "Female";
     public static final String MALE_GENDER = "Male";

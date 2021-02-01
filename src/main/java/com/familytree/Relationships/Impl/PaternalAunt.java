@@ -1,12 +1,16 @@
-package com.familytree.Relationships;
+package com.familytree.Relationships.Impl;
 
-import com.familytree.Gender.Female;
+import com.familytree.Gender.Impl.Female;
 import com.familytree.Person.PersonInterface;
+import com.familytree.Relationships.RelationshipInterface;
 import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * represent paternal-aunt relationship in familyTree
+ */
 public class PaternalAunt implements RelationshipInterface {
 
     /**
@@ -14,7 +18,7 @@ public class PaternalAunt implements RelationshipInterface {
      * @return list of paternal-aunt[father's sisters]
      */
     @Override
-    public List<PersonInterface> getRelatives(@NonNull PersonInterface person) {
+    public List<PersonInterface> getRelatives(@NonNull final PersonInterface person) {
         List<PersonInterface> relatives = new ArrayList<>();
         PersonInterface father = person.getFather();
         if (father != null) {

@@ -1,11 +1,15 @@
-package com.familytree.Relationships;
+package com.familytree.Relationships.Impl;
 
 import com.familytree.Person.PersonInterface;
+import com.familytree.Relationships.RelationshipInterface;
 import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * represent siblings relationship in familyTree
+ */
 public class Siblings implements RelationshipInterface {
 
     /**
@@ -13,7 +17,7 @@ public class Siblings implements RelationshipInterface {
      * @return list of all siblings
      */
     @Override
-    public List<PersonInterface> getRelatives(@NonNull PersonInterface person) {
+    public List<PersonInterface> getRelatives(@NonNull final PersonInterface person) {
         List<PersonInterface> siblings = new ArrayList<>();
         PersonInterface father = person.getFather();
         if (father != null) {

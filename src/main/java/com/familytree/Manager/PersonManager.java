@@ -1,20 +1,22 @@
 package com.familytree.Manager;
 
 import com.familytree.Exception.RelationshipNotFound;
-import com.familytree.Gender.Female;
+import com.familytree.Gender.Impl.Female;
 import com.familytree.Gender.GenderCreator;
-import com.familytree.Person.PersonClass;
+import com.familytree.Person.Impl.PersonClass;
 import com.familytree.Person.PersonInterface;
 import com.familytree.Relationships.RelationshipCreator;
 import com.familytree.Utility.Constants;
 import com.familytree.Utility.ReturnResponse;
 import lombok.NonNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Manager class to store every person reference in the FamilyTree
+ */
 public class PersonManager {
     private static final Map<String, PersonInterface> personMap = new HashMap<>();
 
@@ -24,7 +26,7 @@ public class PersonManager {
      * @param mother person's mother
      * @return a string response stating whether the operation was successful or not
      */
-    private ReturnResponse addInFamilyTree(@NonNull PersonInterface person, PersonInterface father, PersonInterface mother) {
+    private ReturnResponse addInFamilyTree(@NonNull final PersonInterface person, final PersonInterface father, final PersonInterface mother) {
         if (personMap.containsKey(person.getName())) {
             return new ReturnResponse(Constants.PERSON_ALREADY_PRESENT);
 //            throw new PersonAlreadyExists();
@@ -41,7 +43,7 @@ public class PersonManager {
      * @param gender gender name
      * @return a string response stating whether the operation was successful or not
      */
-    public ReturnResponse addChild(@NonNull String mother, @NonNull String child, @NonNull String gender) {
+    public ReturnResponse addChild(@NonNull final String mother, @NonNull final String child, @NonNull final String gender) {
         if (!personMap.containsKey(mother)) {
             return new ReturnResponse(Constants.PERSON_NOT_FOUND);
 //            throw new PersonNotFound();
@@ -64,7 +66,7 @@ public class PersonManager {
      * @param gender gender name
      * @return a string response stating whether the operation was successful or not
      */
-    public ReturnResponse addChild(@NonNull String child, @NonNull String gender) {
+    public ReturnResponse addChild(@NonNull final String child, @NonNull final String gender) {
         PersonInterface childRef = new PersonClass(child, GenderCreator.getGender(gender));
         return addInFamilyTree(childRef, null, null);
     }
@@ -77,13 +79,13 @@ public class PersonManager {
      * @return a string response containing names of all the relatives having specified relationship to the person
      */
 
-    public ReturnResponse getRelationship(@NonNull String personName, @NonNull String relationshipName) {
+    public ReturnResponse getRelationship(@NonNull final String personName, @NonNull final String relationshipName) {
         if (!personMap.containsKey(personName)) {
             return new ReturnResponse(Constants.PERSON_NOT_FOUND);
 //            throw new PersonNotFound();
         }
         PersonInterface personRef = personMap.get(personName);
-        List<PersonInterface> relatives = new ArrayList<>();
+        List<PersonInterface> relatives;
         try {
             relatives = RelationshipCreator.getRelationship(relationshipName).getRelatives(personRef);
         } catch (RelationshipNotFound ex) {
@@ -99,7 +101,7 @@ public class PersonManager {
      * @param partner2 partner2's name
      * @return a string response stating whether the operation was successful or not
      */
-    public ReturnResponse setPartner(@NonNull String partner1, @NonNull String partner2) {
+    public ReturnResponse setPartner(@NonNull final String partner1, @NonNull final String partner2) {
         if (!personMap.containsKey(partner1) || !personMap.containsKey(partner2)) {
             return new ReturnResponse(Constants.PERSON_NOT_FOUND);
 //            throw new PersonNotFound();
@@ -112,11 +114,10 @@ public class PersonManager {
 
     /**
      * function to generate response
-     *
      * @param relatives list of all relatives
      * @return response containing name of all relatives
      */
-    private ReturnResponse generateResponseFromList(List<PersonInterface> relatives) {
+    private ReturnResponse generateResponseFromList(@NonNull final List<PersonInterface> relatives) {
         StringBuilder response = new StringBuilder();
         for (PersonInterface person : relatives) {
             response.append(person.getName()).append(" ");

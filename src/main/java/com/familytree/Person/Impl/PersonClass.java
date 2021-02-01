@@ -1,10 +1,15 @@
-package com.familytree.Person;
+package com.familytree.Person.Impl;
 
 import com.familytree.Gender.GenderInterface;
+import com.familytree.Person.PersonInterface;
+import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a person
+ */
 public class PersonClass implements PersonInterface {
 
     private final String name;
@@ -14,12 +19,13 @@ public class PersonClass implements PersonInterface {
     private PersonInterface mother;
     private final GenderInterface gender;
 
-    public PersonClass(String name, GenderInterface gender) {
+    public PersonClass(@NonNull final String name,@NonNull final GenderInterface gender) {
         this.name = name;
         this.gender = gender;
         children = new ArrayList<>();
         this.father = null;
         this.mother = null;
+        this.partner = null;
     }
 
     @Override
@@ -28,7 +34,7 @@ public class PersonClass implements PersonInterface {
     }
 
     @Override
-    public void setFather(PersonInterface father) {
+    public void setFather(final PersonInterface father) {
         if (father != null) {
             this.father = father;
             this.father.addChild(this);
@@ -38,7 +44,7 @@ public class PersonClass implements PersonInterface {
     }
 
     @Override
-    public void setMother(PersonInterface mother) {
+    public void setMother(final PersonInterface mother) {
         if (mother != null) {
             this.mother = mother;
             this.mother.addChild(this);
@@ -48,7 +54,7 @@ public class PersonClass implements PersonInterface {
     }
 
     @Override
-    public void setPartner(PersonInterface partner) {
+    public void setPartner(@NonNull final PersonInterface partner) {
         this.partner = partner;
         if (partner.getPartner() == this) return;
         partner.setPartner(this);
@@ -75,12 +81,12 @@ public class PersonClass implements PersonInterface {
     }
 
     @Override
-    public void addChild(PersonInterface child) {
+    public void addChild(@NonNull final PersonInterface child) {
         children.add(child);
     }
 
     @Override
-    public void addChildren(List<PersonInterface> children) {
+    public void addChildren(@NonNull final List<PersonInterface> children) {
         this.children.addAll(children);
     }
 

@@ -1,13 +1,18 @@
-package com.familytree.Relationships;
+package com.familytree.Relationships.Impl;
 
-import com.familytree.Gender.Male;
+import com.familytree.Gender.Impl.Male;
 import com.familytree.Person.PersonInterface;
+import com.familytree.Relationships.RelationshipCreator;
+import com.familytree.Relationships.RelationshipInterface;
 import com.familytree.Utility.Constants;
 import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represent a brother-in-law relationship in familytree
+ */
 public class BrotherInLaw implements RelationshipInterface {
     /**
      * get all brother-in-law[Spouse’s brothers, Husbands of siblings]
@@ -16,7 +21,7 @@ public class BrotherInLaw implements RelationshipInterface {
      * @return list of relatives
      */
     @Override
-    public List<PersonInterface> getRelatives(@NonNull PersonInterface person) {
+    public List<PersonInterface> getRelatives(@NonNull final PersonInterface person) {
         List<PersonInterface> brotherInLaws = new ArrayList<>();
         PersonInterface partner = person.getPartner();
         RelationshipInterface siblings = RelationshipCreator.getRelationship(Constants.SIBLINGS);

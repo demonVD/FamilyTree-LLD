@@ -17,10 +17,10 @@ public class DriverClass {
         }
 
         // extracting input file path from argument
-        String inputFilePath = args[0].trim();
+        final String inputFilePath = args[0].trim();
 
         // initializing the family tree
-        PersonManager personManager = new PersonManager();
+        final PersonManager personManager = new PersonManager();
         personManager.addChild("Shan", Constants.MALE_GENDER);
         personManager.addChild("Anga", Constants.FEMALE_GENDER);
         personManager.setPartner("Anga", "Shan");
@@ -45,7 +45,6 @@ public class DriverClass {
         personManager.setPartner("Chitra", "Aras");
         personManager.addChild("Arit", Constants.MALE_GENDER);
         personManager.addChild("Chitra", "Ahit", Constants.MALE_GENDER);
-        ;
         personManager.addChild("Chitra", "Jnki", Constants.FEMALE_GENDER);
         personManager.setPartner("Jnki", "Arit");
         personManager.addChild("Jnki", "Laki", Constants.MALE_GENDER);
@@ -64,18 +63,22 @@ public class DriverClass {
         personManager.addChild("Krpi", "Krithi", Constants.FEMALE_GENDER);
 
         // reading input file and calling appropriate function after each line
-        File inputFile = new File(inputFilePath);
-        BufferedReader bufferedReader;
+        final File inputFile = new File(inputFilePath);
 
-        try {
-            bufferedReader = new BufferedReader(new FileReader(inputFile));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] split = line.split("\\s+");
+                // split[0] -> function to perform
                 String function = split[0];
-                if (Constants.ADD_CHILD_FN_SIG.equalsIgnoreCase(function)) {
+                if (Constants.ADD_CHILD_FUNCTION_SIGNATURE.equalsIgnoreCase(function)) {
+                    // split[1] -> mother name
+                    // split[2] -> child name
+                    // split[3] -> child gender
                     System.out.println(personManager.addChild(split[1], split[2], split[3]).getResponse());
-                } else if (Constants.GET_RELATIONSHIP_FN_SIG.equalsIgnoreCase(function)) {
+                } else if (Constants.GET_RELATIONSHIP_FUNCTION_SIGNATURE.equalsIgnoreCase(function)) {
+                    // split[1] -> person name
+                    // split[2] -> relationship name
                     System.out.println(personManager.getRelationship(split[1], split[2]).getResponse());
                 } else {
                     System.out.println(Constants.INVALID_COMMAND_IN_FILE);
