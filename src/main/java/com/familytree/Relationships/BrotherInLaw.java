@@ -7,11 +7,11 @@ import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class BrotherInLaw implements RelationshipInterface{
+public class BrotherInLaw implements RelationshipInterface {
     /**
      * get all brother-in-law[Spouse’s brothers, Husbands of siblings]
+     *
      * @param person person whose relatives are to be generated
      * @return list of relatives
      */
@@ -20,23 +20,18 @@ public class BrotherInLaw implements RelationshipInterface{
         List<PersonInterface> brotherInLaws = new ArrayList<>();
         PersonInterface partner = person.getPartner();
         RelationshipInterface siblings = RelationshipCreator.getRelationship(Constants.SIBLINGS);
-        if(partner != null)
-        {
+        if (partner != null) {
             List<PersonInterface> spouseSiblings = siblings.getRelatives(partner);
-            for(PersonInterface child : spouseSiblings)
-            {
-                if(child.getGender() instanceof Male)
-                {
+            for (PersonInterface child : spouseSiblings) {
+                if (child.getGender() instanceof Male) {
                     brotherInLaws.add(child);
                 }
             }
         }
 
         List<PersonInterface> personSiblings = siblings.getRelatives(person);
-        for(PersonInterface sib : personSiblings)
-        {
-            if(null != sib.getPartner() && sib.getPartner().getGender() instanceof Male)
-            {
+        for (PersonInterface sib : personSiblings) {
+            if (null != sib.getPartner() && sib.getPartner().getGender() instanceof Male) {
                 brotherInLaws.add(sib.getPartner());
             }
         }

@@ -5,7 +5,7 @@ import com.familytree.Gender.GenderInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonClass implements PersonInterface{
+public class PersonClass implements PersonInterface {
 
     private final String name;
     private PersonInterface partner;
@@ -23,27 +23,23 @@ public class PersonClass implements PersonInterface{
     }
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
     @Override
-    public void setFather(PersonInterface father)
-    {
-        if(father != null)
-        {
+    public void setFather(PersonInterface father) {
+        if (father != null) {
             this.father = father;
             this.father.addChild(this);
             return;
         }
         this.father = null;
     }
+
     @Override
-    public void setMother(PersonInterface mother)
-    {
-        if(mother != null)
-        {
+    public void setMother(PersonInterface mother) {
+        if (mother != null) {
             this.mother = mother;
             this.mother.addChild(this);
             return;
@@ -52,10 +48,9 @@ public class PersonClass implements PersonInterface{
     }
 
     @Override
-    public void setPartner(PersonInterface partner)
-    {
+    public void setPartner(PersonInterface partner) {
         this.partner = partner;
-        if(partner.getPartner() == this) return;
+        if (partner.getPartner() == this) return;
         partner.setPartner(this);
     }
 
@@ -70,32 +65,27 @@ public class PersonClass implements PersonInterface{
     }
 
     @Override
-    public PersonInterface getMother()
-    {
+    public PersonInterface getMother() {
         return this.mother;
     }
 
     @Override
-    public GenderInterface getGender()
-    {
+    public GenderInterface getGender() {
         return this.gender.getGender();
     }
 
     @Override
-    public void addChild(PersonInterface child)
-    {
+    public void addChild(PersonInterface child) {
         children.add(child);
     }
 
     @Override
-    public void addChildren(List<PersonInterface> children)
-    {
+    public void addChildren(List<PersonInterface> children) {
         this.children.addAll(children);
     }
 
     @Override
-    public List<PersonInterface> getChildren()
-    {
+    public List<PersonInterface> getChildren() {
         return this.children;
     }
 }

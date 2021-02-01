@@ -1,17 +1,13 @@
 package com.familytree.Relationships;
 
-import com.familytree.Gender.Female;
-import com.familytree.Gender.GenderInterface;
 import com.familytree.Gender.Male;
-import com.familytree.Person.PersonClass;
 import com.familytree.Person.PersonInterface;
 import lombok.NonNull;
 
-import javax.lang.model.type.ArrayType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MaternalUncle implements RelationshipInterface{
+public class MaternalUncle implements RelationshipInterface {
 
     /**
      * @param person person whose relatives are to be returned
@@ -21,9 +17,9 @@ public class MaternalUncle implements RelationshipInterface{
     public List<PersonInterface> getRelatives(@NonNull PersonInterface person) {
         List<PersonInterface> relatives = new ArrayList<>();
         PersonInterface mother = person.getMother();
-        if(mother != null) {
+        if (mother != null) {
             PersonInterface grandMother = mother.getMother();
-            if(grandMother != null) {
+            if (grandMother != null) {
                 List<PersonInterface> children = grandMother.getChildren();
                 for (PersonInterface child : children) {
                     if (child.getGender() instanceof Male) {

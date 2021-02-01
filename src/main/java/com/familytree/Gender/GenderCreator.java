@@ -9,18 +9,12 @@ public class GenderCreator {
      * @param genderType string specifying gender type
      * @return an instance of specified gender
      */
-    public static GenderInterface getGender(String genderType)
-    {
-        if(Constants.FEMALE_GENDER.equalsIgnoreCase(genderType))
-        {
+    public static GenderInterface getGender(String genderType) {
+        if (Constants.FEMALE_GENDER.equalsIgnoreCase(genderType)) {
             return new Female();
-        }
-        else if(Constants.MALE_GENDER.equalsIgnoreCase(genderType))
-        {
+        } else if (Constants.MALE_GENDER.equalsIgnoreCase(genderType)) {
             return new Male();
-        }
-        else
-        {
+        } else {
             throw new GenderNotDefined();
         }
     }

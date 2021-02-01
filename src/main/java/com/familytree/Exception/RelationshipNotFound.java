@@ -1,4 +1,4 @@
 package com.familytree.Exception;
 
-public class RelationshipNotFound extends RuntimeException{
+public class RelationshipNotFound extends RuntimeException {
 }

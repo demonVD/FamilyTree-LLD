@@ -1,26 +1,17 @@
-package com.familytree.Client;
-
 import com.familytree.Manager.PersonManager;
 import com.familytree.Utility.Constants;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DriverClass {
-    public static void main(String[] args) {
-        if (args.length == 0) {
-            System.out.println(Constants.NO_ARGUMENTS_PROVIDED);
-            return;
-        }
+public class TestFamilyTree {
 
-        // extracting input file path from argument
-        String inputFilePath = args[0].trim();
+    private static final PersonManager personManager = new PersonManager();
 
-        // initializing the family tree
-        PersonManager personManager = new PersonManager();
+    @BeforeAll
+    public static void test() {
         personManager.addChild("Shan", Constants.MALE_GENDER);
         personManager.addChild("Anga", Constants.FEMALE_GENDER);
         personManager.setPartner("Anga", "Shan");
@@ -62,29 +53,67 @@ public class DriverClass {
         personManager.addChild("Satvy", "Vasa", Constants.MALE_GENDER);
         personManager.addChild("Krpi", "Kriya", Constants.MALE_GENDER);
         personManager.addChild("Krpi", "Krithi", Constants.FEMALE_GENDER);
+    }
 
-        // reading input file and calling appropriate function after each line
-        File inputFile = new File(inputFilePath);
-        BufferedReader bufferedReader;
+    @Test
+    @DisplayName("TEST : ADD_CHILD")
+    public void childAdditionTest() {
+        assertEquals(Constants.CHILD_ADDITION_SUCCEEDED,
+                personManager.addChild("Chitra", "Aria", Constants.FEMALE_GENDER).getResponse());
+    }
 
-        try {
-            bufferedReader = new BufferedReader(new FileReader(inputFile));
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] split = line.split("\\s+");
-                String function = split[0];
-                if (Constants.ADD_CHILD_FN_SIG.equalsIgnoreCase(function)) {
-                    System.out.println(personManager.addChild(split[1], split[2], split[3]).getResponse());
-                } else if (Constants.GET_RELATIONSHIP_FN_SIG.equalsIgnoreCase(function)) {
-                    System.out.println(personManager.getRelationship(split[1], split[2]).getResponse());
-                } else {
-                    System.out.println(Constants.INVALID_COMMAND_IN_FILE);
-                }
-            }
-        } catch (FileNotFoundException ex) {
-            System.out.println(Constants.FILE_NOT_FOUND);
-        } catch (IOException ex) {
-            System.out.println(Constants.UNABLE_TO_READ_FILE);
-        }
+    @Test
+    @DisplayName("TEST : GET_RELATIONSHIP Brother-in-law")
+    public void getBrotherInLaw() {
+        assertEquals("Asva", personManager.getRelationship("Krpi", Constants.BROTHER_IN_LAW).getResponse());
+    }
+
+    @Test
+    @DisplayName("TEST : GET_RELATIONSHIP Maternal-Aunt")
+    public void getMaternalAuntTest() {
+        assertEquals(Constants.EMPTY_LIST,
+                personManager.getRelationship("Lavnya", Constants.MATERNAL_AUNT).getResponse());
+    }
+
+    @Test
+    @DisplayName("TEST : GET_RELATIONSHIP Daughter")
+    public void getDaughter() {
+        assertEquals("Lavnya", personManager.getRelationship("Arit", Constants.DAUGHTER).getResponse());
+    }
+
+    @Test
+    @DisplayName("TEST : GET_RELATIONSHIP Maternal-Uncle")
+    public void getMaternalUncle() {
+        assertEquals(Constants.EMPTY_LIST, personManager.getRelationship("Tritha", Constants.MATERNAL_UNCLE).getResponse());
+    }
+
+    @Test
+    @DisplayName("TEST : GET_RELATIONSHIP Paternal-Uncle")
+    public void getPaternalUncle() {
+        assertEquals("Chit Ish Vich", personManager.getRelationship("Jnki", Constants.PATERNAL_UNCLE).getResponse());
+    }
+
+    @Test
+    @DisplayName("TEST : GET_RELATIONSHIP Paternal-Aunt")
+    public void getPaternalAunt() {
+        assertEquals("Satya", personManager.getRelationship("Jnki", Constants.PATERNAL_AUNT).getResponse());
+    }
+
+    @Test
+    @DisplayName("TEST : GET_RELATIONSHIP Siblings")
+    public void getSiblingRelationTest() {
+        assertEquals("Ahit Jnki", personManager.getRelationship("Aria", Constants.SIBLINGS).getResponse());
+    }
+
+    @Test
+    @DisplayName("TEST : GET_RELATIONSHIP Sister-in-law")
+    public void getSisterInLaw() {
+        assertEquals("Krpi", personManager.getRelationship("Asva", Constants.SISTER_IN_LAW).getResponse());
+    }
+
+    @Test
+    @DisplayName("TEST : GET_RELATIONSHIP Son")
+    public void getSon() {
+        assertEquals("Vasa", personManager.getRelationship("Asva", Constants.SON).getResponse());
     }
 }

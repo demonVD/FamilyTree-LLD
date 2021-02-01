@@ -6,7 +6,7 @@ import lombok.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Siblings implements RelationshipInterface{
+public class Siblings implements RelationshipInterface {
 
     /**
      * @param person person whose relatives are to be calculated
@@ -16,7 +16,7 @@ public class Siblings implements RelationshipInterface{
     public List<PersonInterface> getRelatives(@NonNull PersonInterface person) {
         List<PersonInterface> siblings = new ArrayList<>();
         PersonInterface father = person.getFather();
-        if(father != null) {
+        if (father != null) {
             List<PersonInterface> children = father.getChildren();
             for (PersonInterface child : children) {
                 if (child != person) {

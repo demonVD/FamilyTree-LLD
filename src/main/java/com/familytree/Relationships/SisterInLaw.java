@@ -1,7 +1,6 @@
 package com.familytree.Relationships;
 
 import com.familytree.Gender.Female;
-import com.familytree.Gender.Male;
 import com.familytree.Person.PersonInterface;
 import com.familytree.Utility.Constants;
 import lombok.NonNull;
@@ -9,7 +8,7 @@ import lombok.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SisterInLaw implements RelationshipInterface{
+public class SisterInLaw implements RelationshipInterface {
 
     /**
      * @param person person whose relatives are to be returned
@@ -21,18 +20,18 @@ public class SisterInLaw implements RelationshipInterface{
         PersonInterface partner = person.getPartner();
         RelationshipInterface siblings = RelationshipCreator.getRelationship(Constants.SIBLINGS);
 
-        if(partner != null) {
+        if (partner != null) {
             List<PersonInterface> spouseSiblings = siblings.getRelatives(partner);
-            for(PersonInterface child : spouseSiblings) {
-                if(child.getGender() instanceof Female) {
+            for (PersonInterface child : spouseSiblings) {
+                if (child.getGender() instanceof Female) {
                     sistersInLaws.add(child);
                 }
             }
         }
 
         List<PersonInterface> personSiblings = siblings.getRelatives(person);
-        for(PersonInterface sib : personSiblings) {
-            if(null != sib.getPartner() && sib.getPartner().getGender() instanceof Female) {
+        for (PersonInterface sib : personSiblings) {
+            if (null != sib.getPartner() && sib.getPartner().getGender() instanceof Female) {
                 sistersInLaws.add(sib.getPartner());
             }
         }

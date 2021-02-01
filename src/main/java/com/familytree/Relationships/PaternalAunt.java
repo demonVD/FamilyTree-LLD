@@ -7,7 +7,7 @@ import lombok.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaternalAunt implements RelationshipInterface{
+public class PaternalAunt implements RelationshipInterface {
 
     /**
      * @param person person whose relatives are to be returned
@@ -17,12 +17,12 @@ public class PaternalAunt implements RelationshipInterface{
     public List<PersonInterface> getRelatives(@NonNull PersonInterface person) {
         List<PersonInterface> relatives = new ArrayList<>();
         PersonInterface father = person.getFather();
-        if(father != null){
+        if (father != null) {
             PersonInterface grandFather = father.getFather();
-            if(grandFather != null){
+            if (grandFather != null) {
                 List<PersonInterface> children = grandFather.getChildren();
-                for(PersonInterface child : children) {
-                    if(child.getGender() instanceof Female) {
+                for (PersonInterface child : children) {
+                    if (child.getGender() instanceof Female) {
                         relatives.add(child);
                     }
                 }

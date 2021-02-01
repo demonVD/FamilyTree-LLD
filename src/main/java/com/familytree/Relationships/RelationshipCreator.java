@@ -9,46 +9,26 @@ public class RelationshipCreator {
      * @param relationship relationship type
      * @return an instance of specified relationship
      */
-    public static RelationshipInterface getRelationship(String relationship)
-    {
-        if(relationship.equalsIgnoreCase(Constants.BROTHER_IN_LAW))
-        {
+    public static RelationshipInterface getRelationship(String relationship) {
+        if (relationship.equalsIgnoreCase(Constants.BROTHER_IN_LAW)) {
             return new BrotherInLaw();
-        }
-        else if(relationship.equalsIgnoreCase(Constants.DAUGHTER))
-        {
+        } else if (relationship.equalsIgnoreCase(Constants.DAUGHTER)) {
             return new Daughter();
-        }
-        else if(relationship.equalsIgnoreCase(Constants.MATERNAL_AUNT))
-        {
+        } else if (relationship.equalsIgnoreCase(Constants.MATERNAL_AUNT)) {
             return new MaternalAunt();
-        }
-        else if(relationship.equalsIgnoreCase(Constants.MATERNAL_UNCLE))
-        {
+        } else if (relationship.equalsIgnoreCase(Constants.MATERNAL_UNCLE)) {
             return new MaternalUncle();
-        }
-        else if(relationship.equalsIgnoreCase(Constants.PATERNAL_AUNT))
-        {
-            return  new PaternalAunt();
-        }
-        else if(relationship.equalsIgnoreCase(Constants.PATERNAL_UNCLE))
-        {
-            return  new PaternalUncle();
-        }
-        else if(relationship.equalsIgnoreCase(Constants.SIBLINGS))
-        {
+        } else if (relationship.equalsIgnoreCase(Constants.PATERNAL_AUNT)) {
+            return new PaternalAunt();
+        } else if (relationship.equalsIgnoreCase(Constants.PATERNAL_UNCLE)) {
+            return new PaternalUncle();
+        } else if (relationship.equalsIgnoreCase(Constants.SIBLINGS)) {
             return new Siblings();
-        }
-        else if(relationship.equalsIgnoreCase(Constants.SISTER_IN_LAW))
-        {
+        } else if (relationship.equalsIgnoreCase(Constants.SISTER_IN_LAW)) {
             return new SisterInLaw();
-        }
-        else if(relationship.equalsIgnoreCase(Constants.SON))
-        {
+        } else if (relationship.equalsIgnoreCase(Constants.SON)) {
             return new Son();
-        }
-        else
-        {
+        } else {
             throw new RelationshipNotFound();
         }
     }
